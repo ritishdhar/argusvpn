@@ -16,7 +16,7 @@ const Hero = () => {
         </div>
 
         {/* Foreground Text Content */}
-        <div className="relative z-10 text-center flex flex-col items-center pt-16 md:pt-0">
+        <div className="relative z-10 text-center flex flex-col items-center pt-24 md:pt-32">
           <div className="font-headline text-6xl md:text-8xl font-bold tracking-wider text-white hero-h1 mb-4">
             <span className="inline-block" style={{marginRight: '0.1em'}}>A</span>
             <span className="inline-block" style={{marginRight: '0.1em'}}>R</span>
