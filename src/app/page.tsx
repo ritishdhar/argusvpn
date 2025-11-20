@@ -39,11 +39,12 @@ export default function Home() {
 
       // --- HERO ANIMATION ---
       timeline
-        .from(".hero-h1", {
-          y: 20,
+        .from(".hero-h1 span", {
+          y: 30,
           opacity: 0,
-          duration: 0.6,
+          duration: 0.7,
           ease: 'power2.out',
+          stagger: 0.08,
         })
         .from(".hero-subtext", {
           y: 20,

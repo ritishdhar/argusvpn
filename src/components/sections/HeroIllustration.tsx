@@ -4,16 +4,6 @@ import type { SVGProps } from "react";
 export function HeroIllustration(props: SVGProps<SVGSVGElement>) {
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      
-      {/* Large ARGUS Glyphs */}
-      <div className="absolute inset-0 flex items-center justify-center text-[24vw] md:text-[16vw] font-bold font-headline text-white/5 select-none pointer-events-none">
-        <span className="absolute -translate-x-[1.2em] -translate-y-[0.1em] rotate-[-25deg]">A</span>
-        <span className="absolute -translate-x-[0.5em] -translate-y-[1em] rotate-[-15deg]">R</span>
-        <span className="absolute translate-x-[0.3em] -translate-y-[1.1em] rotate-[-5deg]">G</span>
-        <span className="absolute translate-x-[1em] -translate-y-[0.5em] rotate-[10deg]">U</span>
-        <span className="absolute translate-x-[1.3em] translate-y-[0.4em] rotate-[20deg]">S</span>
-      </div>
-
       {/* Floating Orb */}
       <div className="hero-floating hero-floating-fallback w-full max-w-lg mx-auto">
         <svg
