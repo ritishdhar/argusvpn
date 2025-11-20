@@ -4,9 +4,46 @@ import type { SVGProps } from "react";
 export function HeroIllustration(props: SVGProps<SVGSVGElement>) {
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      {/* Floating Orb */}
+      {/* The main glowing arc */}
+      <svg
+        className="hero-arc absolute top-0 w-full h-auto"
+        viewBox="0 0 1440 800"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMin slice"
+      >
+        <defs>
+          <radialGradient
+            id="arc-gradient"
+            cx="50%"
+            cy="0"
+            r="100%"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="white" stopOpacity="1" />
+            <stop offset="0.6" stopColor="white" stopOpacity="0.1" />
+            <stop offset="1" stopColor="white" stopOpacity="0" />
+          </radialGradient>
+          <filter id="arc-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="30" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <path
+          d="M-200 650 C 300 -100, 1140 -100, 1640 650"
+          stroke="url(#arc-gradient)"
+          strokeWidth="2"
+          filter="url(#arc-glow)"
+        />
+      </svg>
+      
+      {/* Floating Orb / Magnifying Glass */}
       <div className="hero-floating hero-floating-fallback w-full max-w-lg mx-auto">
         <svg
+          className="hero-magnifying-glass"
           viewBox="0 0 500 500"
           xmlns="http://www.w3.org/2000/svg"
           {...props}

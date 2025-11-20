@@ -12,12 +12,14 @@ import Features from '@/components/sections/Features';
 import Counters from '@/components/sections/Counters';
 import Faq from '@/components/sections/Faq';
 import Cta from '@/components/sections/Cta';
+import { useIsMobile } from '@/hooks/use-mobile';
 import Footer from '@/components/sections/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const comp = useRef(null);
+  const isMobile = useIsMobile();
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
@@ -59,22 +61,46 @@ export default function Home() {
           duration: 0.45,
           stagger: 0.06,
           ease: 'power2.out',
-        }, "-=0.3");
+        }, "-=0.3")
+        .fromTo('.hero-arc', { yPercent: -100, opacity: 0.5 }, { yPercent: 0, opacity: 1, duration: 1.2, ease: 'power3.out' }, 0);
+
 
       // --- HERO FLOATING ANIMATION ---
-      gsap.to('.hero-floating', {
-        x: '+=120',
-        duration: 3.6,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
+      let mm = gsap.matchMedia();
+      mm.add("(min-width: 768px)", () => {
+        gsap.to('.hero-floating', {
+          x: '+=120',
+          duration: 3.6,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true,
+        });
+        gsap.to('.hero-floating', {
+          rotation: 0.6,
+          duration: 3.6,
+          repeat: -1,
+          yoyo: true,
+        });
+
+        // Mouse interaction for the magnifying glass
+        const heroSection = document.querySelector('.hero-section');
+        if (heroSection) {
+          heroSection.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const x = clientX / window.innerWidth - 0.5;
+            const y = clientY / window.innerHeight - 0.5;
+
+            gsap.to('.hero-magnifying-glass', {
+              x: x * 40,
+              y: y * 40,
+              rotation: (x + y) * 5,
+              duration: 0.8,
+              ease: 'power2.out',
+            });
+          });
+        }
       });
-      gsap.to('.hero-floating', {
-        rotation: 0.6,
-        duration: 3.6,
-        repeat: -1,
-        yoyo: true,
-      });
+
 
       // --- SCROLL TRIGGERS ---
       const sections = gsap.utils.toArray('.section-reveal');
