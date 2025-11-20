@@ -57,7 +57,7 @@ const CounterItem = ({ id, value, label, Icon }: { id: string; value: number; la
 
 const Counters = () => {
   return (
-    <section className="py-16 md:py-24 bg-background section-reveal">
+    <section className="bg-background section-reveal">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {counters.map((counter) => (

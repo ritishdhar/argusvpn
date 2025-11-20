@@ -126,17 +126,19 @@ export default function Home() {
   }, []);
 
   return (
-    <div ref={comp}>
+    <div ref={comp} className="bg-background">
       <Preloader />
       <div className="flex min-h-screen flex-col">
         <Header />
         <main className="flex-1">
           <Hero />
-          <Partners />
-          <Features />
-          <Counters />
-          <Faq />
-          <Cta />
+          <div className="space-y-24 md:space-y-32">
+            <Partners />
+            <Features />
+            <Counters />
+            <Faq />
+            <Cta />
+          </div>
         </main>
         <Footer />
       </div>

@@ -4,7 +4,7 @@ import React from 'react';
 
 const Cta = () => {
   return (
-    <section className="py-16 md:py-24 bg-background section-reveal">
+    <section className="bg-background section-reveal">
       <div className="container mx-auto px-4 text-center">
         <h2 className="font-headline text-3xl md:text-5xl font-bold mb-4">
           Ready to get started?

@@ -5,10 +5,10 @@ import { HeroIllustration } from './HeroIllustration';
 
 const Hero = () => {
   return (
-    <section className="relative bg-gradient-hero" style={{ minHeight: 'calc(100vh - 5rem)'}}>
+    <section className="relative bg-gradient-hero py-20 md:py-0" style={{ minHeight: 'calc(100vh - 5rem)'}}>
       <div className="container mx-auto px-4 h-full flex flex-col justify-center">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div className="text-center md:text-left z-10">
+          <div className="text-center md:text-left z-10 pt-16 md:pt-0">
             <h1 className="font-headline text-4xl md:text-6xl font-bold leading-tight mb-4 hero-h1">
               VPN that simply works
             </h1>

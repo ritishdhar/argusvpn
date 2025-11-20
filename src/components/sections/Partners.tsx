@@ -14,7 +14,7 @@ const partners = [
 
 const Partners = () => {
   return (
-    <section className="py-12 bg-background section-reveal">
+    <section className="bg-background section-reveal">
       <div className="container mx-auto px-4">
         <h3 className="text-center text-muted-foreground font-semibold mb-8">
           Works With
