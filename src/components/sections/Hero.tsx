@@ -17,7 +17,7 @@ const Hero = () => {
 
         {/* Foreground Text Content */}
         <div className="relative z-10 text-center flex flex-col items-center pt-24 md:pt-32">
-          <div className="font-headline text-6xl md:text-8xl font-bold tracking-wider text-white hero-h1 mb-4">
+          <div className="font-headline text-6xl md:text-8xl font-bold tracking-wider text-white hero-h1 mb-4" style={{ fontFamily: "'Audiowide', sans-serif" }}>
             <span className="inline-block" style={{marginRight: '0.1em'}}>A</span>
             <span className="inline-block" style={{marginRight: '0.1em'}}>R</span>
             <span className="inline-block" style={{marginRight: '0.1em'}}>G</span>
