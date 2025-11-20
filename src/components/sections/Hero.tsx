@@ -5,10 +5,10 @@ import { HeroIllustration } from './HeroIllustration';
 
 const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-gradient-hero pt-24 pb-16 md:pt-32 md:pb-24">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div className="text-center md:text-left">
+    <section className="relative bg-gradient-hero" style={{ minHeight: 'calc(100vh - 5rem)'}}>
+      <div className="container mx-auto px-4 h-full flex flex-col justify-center">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="text-center md:text-left z-10">
             <h1 className="font-headline text-4xl md:text-6xl font-bold leading-tight mb-4 hero-h1">
               VPN that simply works
             </h1>
@@ -26,8 +26,8 @@ const Hero = () => {
               <GooglePlayBadge />
             </div>
           </div>
-          <div className="relative flex items-center justify-center">
-            <HeroIllustration className="w-full max-w-lg mx-auto" />
+          <div className="relative flex items-center justify-center h-full min-h-[400px] md:min-h-0">
+            <HeroIllustration className="absolute inset-0 w-full h-full" />
           </div>
         </div>
       </div>

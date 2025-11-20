@@ -60,15 +60,19 @@ export default function Home() {
           ease: 'power2.out',
         }, "-=0.3");
 
-      // --- CONTINUOUS ANIMATION ---
-      gsap.to(".hero-illustration-float", {
-        x: '+=20',
-        y: '-=10',
-        rotation: 0.8,
-        yoyo: true,
-        repeat: -1,
-        ease: 'power1.inOut',
+      // --- HERO FLOATING ANIMATION ---
+      gsap.to('.hero-floating', {
+        x: '+=120',
         duration: 3.6,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+      });
+      gsap.to('.hero-floating', {
+        rotation: 0.6,
+        duration: 3.6,
+        repeat: -1,
+        yoyo: true,
       });
 
       // --- SCROLL TRIGGERS ---
