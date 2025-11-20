@@ -62,7 +62,7 @@ export default function Home() {
           stagger: 0.06,
           ease: 'power2.out',
         }, "-=0.3")
-        .fromTo('.hero-arc', { yPercent: -100, opacity: 0.5 }, { yPercent: 0, opacity: 1, duration: 1.2, ease: 'power3.out' }, 0);
+        .fromTo('.hero-parabola', { yPercent: -100, opacity: 0.5 }, { yPercent: 0, opacity: 1, duration: 1.2, ease: 'power3.out' }, 0);
 
 
       // --- HERO FLOATING ANIMATION ---
