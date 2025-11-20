@@ -1,7 +1,8 @@
+"use client";
+
 import { Button } from '@/components/ui/button';
-import { AppStoreBadge } from '@/components/icons/AppStoreBadge';
-import { GooglePlayBadge } from '@/components/icons/GooglePlayBadge';
 import { HeroIllustration } from './HeroIllustration';
+import { ChevronDown } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -9,34 +10,41 @@ const Hero = () => {
       <div className="container mx-auto px-4 h-full flex flex-col items-center justify-center">
         
         {/* Background Illustration */}
-        <div className="absolute inset-0 flex items-center justify-center -z-0">
+        <div className="absolute inset-0 flex items-center justify-center -z-0 opacity-40">
           <div className="relative w-full h-full">
             <HeroIllustration className="w-full h-full" />
           </div>
         </div>
 
         {/* Foreground Text Content */}
-        <div className="relative z-10 text-center flex flex-col items-center pt-24">
-          <div className="font-headline text-6xl md:text-8xl font-bold tracking-wider text-white hero-h1 mb-4" style={{ fontFamily: "'Audiowide', sans-serif" }}>
-            <span className="inline-block" style={{marginRight: '0.1em'}}>A</span>
-            <span className="inline-block" style={{marginRight: '0.1em'}}>R</span>
-            <span className="inline-block" style={{marginRight: '0.1em'}}>G</span>
-            <span className="inline-block" style={{marginRight: '0.1em'}}>U</span>
-            <span className="inline-block">S</span>
+        <div className="relative z-10 text-center flex flex-col items-center justify-center pt-24">
+          <div className="font-headline text-6xl md:text-8xl font-bold text-white hero-h1 mb-4" style={{ fontFamily: "'Inter', sans-serif" }}>
+            TRUTHLENS
           </div>
-          <p className="text-2xl md:text-3xl text-muted-foreground mb-2 hero-subtext" style={{ fontFamily: "'Inter', sans-serif" }}>
-            VPN that simply works
+          <p className="text-2xl md:text-3xl text-muted-foreground mb-8 hero-subtext" style={{ fontFamily: "'Inter', sans-serif" }}>
+            Explainable Deepfake Detection
           </p>
-          <p className="text-lg text-muted-foreground/80 mb-8 hero-subtext" style={{ fontFamily: "'Inter', sans-serif" }}>
-            30-days money back guarantee. Fast. Reliable. Safe.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="font-bold hero-cta">Install Argus VPN</Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+            <Button 
+              size="lg" 
+              className="font-bold hero-cta"
+              onClick={() => {
+                document.getElementById('upload-analyze')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Analyze Media
+            </Button>
           </div>
-          <div className="flex gap-4 mt-6 justify-center hero-cta">
-            <AppStoreBadge />
-            <GooglePlayBadge />
-          </div>
+        </div>
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-20">
+          <button
+            onClick={() => {
+              document.getElementById('upload-analyze')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="text-muted-foreground hover:text-primary transition-colors"
+          >
+            <ChevronDown className="w-8 h-8" />
+          </button>
         </div>
       </div>
     </section>

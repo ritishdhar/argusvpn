@@ -4,14 +4,14 @@ import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Globe, MapPin, Server } from 'lucide-react';
+import { Globe, Video, Server } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const counters = [
-  { id: 'locations', value: 50, label: 'Locations', icon: MapPin },
-  { id: 'countries', value: 40, label: 'Country locations', icon: Globe },
-  { id: 'servers', value: 1200, label: 'Servers', icon: Server },
+  { id: 'videos', value: 10000, label: 'Videos Trained On', icon: Video },
+  { id: 'accuracy', value: 95, label: 'Detection Accuracy %', icon: Globe },
+  { id: 'framerate', value: 20, label: 'Frames Per Second', icon: Server },
 ];
 
 const CounterItem = ({ id, value, label, Icon }: { id: string; value: number; label: string; Icon: React.ElementType }) => {
@@ -39,8 +39,8 @@ const CounterItem = ({ id, value, label, Icon }: { id: string; value: number; la
   }, [value]);
 
   return (
-    <Card className="bg-transparent border-0 text-center flex flex-col items-center">
-      <CardHeader className="p-0 mb-4">
+    <Card className="bg-transparent border-0 text-center flex flex-col items-center justify-center w-full">
+      <CardHeader className="p-0 mb-4 flex flex-col items-center">
         <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
           <Icon className="w-8 h-8" />
         </div>
@@ -48,8 +48,8 @@ const CounterItem = ({ id, value, label, Icon }: { id: string; value: number; la
           <span ref={countRef}>0</span>+
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-0">
-        <p className="text-muted-foreground">{label}</p>
+      <CardContent className="p-0 flex flex-col items-center">
+        <p className="text-muted-foreground text-center">{label}</p>
       </CardContent>
     </Card>
   );
@@ -57,7 +57,7 @@ const CounterItem = ({ id, value, label, Icon }: { id: string; value: number; la
 
 const Counters = () => {
   return (
-    <section className="bg-background section-reveal">
+    <section id="counters" className="bg-background section-reveal">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {counters.map((counter) => (

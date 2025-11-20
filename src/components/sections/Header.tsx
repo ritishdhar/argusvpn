@@ -6,17 +6,14 @@ import gsap from 'gsap';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Logo } from '@/components/icons/Logo';
 import { Menu, Globe, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
-  { href: '#features', label: 'Why Argus VPN' },
-  { href: '#pricing', label: 'Cost' },
-  { href: '#devices', label: 'Devices' },
-  { href: '#support', label: 'Support' },
-  { href: '#points', label: 'Get points' },
-  { href: '#blog', label: 'Blog' },
+  { href: '#upload-analyze', label: 'Analyze Media' },
+  { href: '#features', label: 'How It Works' },
+  { href: '#counters', label: 'Statistics' },
+  { href: '#faq', label: 'FAQ' },
 ];
 
 const Header = () => {
@@ -75,18 +72,24 @@ const Header = () => {
         isScrolled ? "h-16 shadow-lg shadow-black/20" : "h-20"
       )}
     >
-      <div className="container mx-auto px-4 h-full">
+      <div className="container mx-auto px-6 md:px-8 h-full">
         <div className="flex h-full items-center justify-between">
           <Link href="/" className="logo flex items-center gap-2">
-            <Logo className="h-8 w-auto" />
-            <span className="font-headline text-xl font-bold hidden sm:inline">Argus VPN</span>
+            <span className="font-headline text-xl font-bold hidden sm:inline">Truthlens AI</span>
           </Link>
 
           <nav className="nav-links hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              <button
+                key={link.href}
+                onClick={() => {
+                  const element = document.querySelector(link.href);
+                  element?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+              >
                 {link.label}
-              </Link>
+              </button>
             ))}
           </nav>
 
@@ -105,8 +108,15 @@ const Header = () => {
                 <DropdownMenuItem>Français</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Button variant="ghost" size="sm">Log in</Button>
-            <Button ref={ctaRef} className="install-cta">Install Argus VPN</Button>
+            <Button 
+              ref={ctaRef} 
+              className="install-cta"
+              onClick={() => {
+                document.getElementById('upload-analyze')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Analyze Media
+            </Button>
           </div>
 
           <div className="lg:hidden">
@@ -120,24 +130,33 @@ const Header = () => {
               <SheetContent side="right" className="w-[300px] sm:w-[400px]">
                 <div className="p-6">
                   <Link href="/" className="flex items-center gap-2 mb-8">
-                    <Logo className="h-8 w-auto" />
-                    <span className="font-headline text-xl font-bold">Argus VPN</span>
+                    <span className="font-headline text-xl font-bold">Truthlens AI</span>
                   </Link>
                   <nav className="flex flex-col gap-6 mb-8">
                     {navLinks.map((link) => (
-                      <Link
+                      <button
                         key={link.href}
-                        href={link.href}
-                        className="text-lg font-medium text-foreground hover:text-primary transition-colors"
-                        onClick={() => setIsMobileMenuOpen(false)}
+                        onClick={() => {
+                          const element = document.querySelector(link.href);
+                          element?.scrollIntoView({ behavior: 'smooth' });
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className="text-lg font-medium text-foreground hover:text-primary transition-colors text-left"
                       >
                         {link.label}
-                      </Link>
+                      </button>
                     ))}
                   </nav>
                   <div className="flex flex-col gap-4">
-                    <Button variant="outline" className="w-full">Log in</Button>
-                    <Button className="w-full">Install Argus VPN</Button>
+                    <Button 
+                      className="w-full"
+                      onClick={() => {
+                        document.getElementById('upload-analyze')?.scrollIntoView({ behavior: 'smooth' });
+                        setIsMobileMenuOpen(false);
+                      }}
+                    >
+                      Analyze Media
+                    </Button>
                   </div>
                 </div>
               </SheetContent>

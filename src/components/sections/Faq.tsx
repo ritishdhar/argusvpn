@@ -7,30 +7,30 @@ import {
 
 const faqItems = [
     {
-        question: "What is a VPN and why do I need one?",
-        answer: "A VPN (Virtual Private Network) is a service that encrypts your internet traffic and routes it through a secure server. This protects your online privacy, secures your data from hackers, and allows you to bypass geo-restrictions to access content from anywhere in the world."
+        question: "What is Truthlens AI and how does it work?",
+        answer: "Truthlens AI is an explainable deepfake-detection web app that lets users upload a video or use their webcam to instantly check whether it's real, fake, or uncertain. It uses a multimodal AI pipeline combining appearance analysis (LNCLIP), frequency analysis (DCT artifacts), and audio-visual sync checking (SyncNet) to detect manipulations and generate an ensemble confidence score."
     },
     {
-        question: "How many devices can I use with Argus VPN?",
-        answer: "With a single Argus VPN subscription, you can connect up to 6 devices simultaneously. We offer dedicated apps for all major platforms, including Windows, macOS, iOS, Android, and Linux."
+        question: "What file formats and video lengths are supported?",
+        answer: "Truthlens AI supports common video formats including MP4, MOV, AVI, and WebM. You can upload videos of various lengths, and our system will analyze them frame-by-frame. For webcam analysis, we support real-time detection with instant feedback."
     },
     {
-        question: "Do you keep logs of my activity?",
-        answer: "No, we have a strict no-logs policy. We are committed to your privacy, which means we never track, collect, or share your private data. Your online activity is for your eyes only."
+        question: "How accurate is the deepfake detection?",
+        answer: "Our multimodal AI pipeline provides high accuracy by combining multiple detection methods. The system generates a confidence score and provides detailed visual evidence including heatmaps and frame-by-frame analysis. Results are categorized as real, fake, or uncertain based on the ensemble confidence score."
     },
     {
-        question: "What is your refund policy?",
-        answer: "We offer a 30-day money-back guarantee on all our plans. If you're not completely satisfied with our service, you can request a full refund within the first 30 days of your purchase, no questions asked."
+        question: "What information is shown in the results dashboard?",
+        answer: "The results dashboard displays the verdict (real/fake/uncertain), confidence score, visual heatmaps highlighting suspicious areas, frame-by-frame evidence with timestamps, and detailed metadata about the analysis including which detection methods flagged potential issues."
     },
     {
-        question: "How can I get customer support?",
-        answer: "Our customer support team is available 24/7 to help you with any questions or issues. You can reach us via live chat on our website or by emailing support@argus-vpn.com. We're always here to help."
+        question: "Is my uploaded video data kept private?",
+        answer: "Yes, we prioritize your privacy. Uploaded videos are processed securely and are not stored permanently. We use your data solely for analysis purposes and follow strict data protection protocols. For more details, please review our privacy policy."
     }
 ];
 
 const Faq = () => {
   return (
-    <section className="bg-card faq-section section-reveal py-24 md:py-32">
+    <section id="faq" className="bg-card faq-section section-reveal py-24 md:py-32">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="font-headline text-3xl md:text-5xl font-bold mb-4">

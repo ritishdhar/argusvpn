@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import Preloader from '@/components/Preloader';
 import Header from '@/components/sections/Header';
 import Hero from '@/components/sections/Hero';
-import Partners from '@/components/sections/Partners';
+import UploadAnalyze from '@/components/sections/UploadAnalyze';
+import Marquee from '@/components/sections/Marquee';
 import Features from '@/components/sections/Features';
 import Counters from '@/components/sections/Counters';
 import Faq from '@/components/sections/Faq';
@@ -21,7 +22,9 @@ export default function Home() {
   const comp = useRef(null);
   const isMobile = useIsMobile();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    let handleMouseMove: (e: MouseEvent) => void;
+
     let ctx = gsap.context(() => {
       // --- PRELOADER ---
       const preloader = document.getElementById('preloader');
@@ -62,45 +65,73 @@ export default function Home() {
           stagger: 0.06,
           ease: 'power2.out',
         }, "-=0.3")
-        .fromTo('.hero-parabola', { yPercent: -100, opacity: 0.5 }, { yPercent: 0, opacity: 1, duration: 1.2, ease: 'power3.out' }, 0);
+        // Eye Blink Animation - Slower and smoother
+        // Top arc (eyelid) moves down gracefully
+        .fromTo('.arc-top', 
+          { y: 200, opacity: 0 }, 
+          { y: 0, opacity: 1, duration: 2.2, ease: 'power2.out' }, 
+          0.5)
+        // Bottom arc (eyelid) moves up at the same time
+        .fromTo('.arc-bottom', 
+          { y: -200, opacity: 0 }, 
+          { y: 0, opacity: 1, duration: 2.2, ease: 'power2.out' }, 
+          '<')
+        // Eyeball scales in smoothly after the eyelids start opening
+        .fromTo('.hero-floating', 
+          { scale: 0.3, opacity: 0 }, 
+          { scale: 1, opacity: 1, duration: 1.8, ease: 'power2.out' }, 
+          '<0.6')
+        // Background glow fades in gently
+        .fromTo('.hero-parabola', 
+          { opacity: 0 }, 
+          { opacity: 1, duration: 2, ease: 'sine.inOut' }, 
+          '<');
 
 
       // --- HERO FLOATING ANIMATION ---
-      let mm = gsap.matchMedia();
-      mm.add("(min-width: 768px)", () => {
-        gsap.to('.hero-floating', {
-          x: '+=120',
-          duration: 3.6,
+      // Run unconditionally
+      gsap.fromTo('.hero-floating', 
+        { x: -40 }, 
+        {
+          x: 40,    
+          duration: 5,
           ease: 'sine.inOut',
           repeat: -1,
           yoyo: true,
-        });
-        gsap.to('.hero-floating', {
-          rotation: 0.6,
-          duration: 3.6,
-          repeat: -1,
-          yoyo: true,
-        });
-
-        // Mouse interaction for the magnifying glass
-        const heroSection = document.querySelector('.hero-section');
-        if (heroSection) {
-          heroSection.addEventListener('mousemove', (e) => {
-            const { clientX, clientY } = e;
-            const x = clientX / window.innerWidth - 0.5;
-            const y = clientY / window.innerHeight - 0.5;
-
-            gsap.to('.hero-magnifying-glass', {
-              x: x * 40,
-              y: y * 40,
-              rotation: (x + y) * 5,
-              duration: 0.8,
-              ease: 'power2.out',
-            });
-          });
         }
+      );
+
+      gsap.to('.hero-floating', {
+        rotation: 5,
+        duration: 3.6,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
       });
 
+      // Mouse interaction 
+      handleMouseMove = (e: MouseEvent) => {
+        // Only run on non-mobile devices
+        if (window.innerWidth < 768) return;
+
+        const { clientX, clientY } = e;
+        // Normalize to -0.5 to 0.5
+        const x = clientX / window.innerWidth - 0.5;
+        const y = clientY / window.innerHeight - 0.5;
+
+        // Target the inner SVG (.hero-magnifying-glass)
+        // Use overwrite: 'auto' to prevent conflict if any other tween touches this
+        gsap.to('.hero-magnifying-glass', {
+          x: x * 250, // Horizontal range ±125px
+          y: y * 80,  // Vertical range ±40px (Constrained)
+          rotation: (x + y) * 20,
+          duration: 0.8,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      };
+
+      window.addEventListener('mousemove', handleMouseMove);
 
       // --- SCROLL TRIGGERS ---
       const sections = gsap.utils.toArray('.section-reveal');
@@ -146,11 +177,15 @@ export default function Home() {
         }
       });
 
-
     }, comp);
 
-    return () => ctx.revert();
-  }, []);
+    return () => {
+      if (handleMouseMove) {
+        window.removeEventListener('mousemove', handleMouseMove);
+      }
+      ctx.revert();
+    };
+  }, []); // Empty dependency array ensures it runs once
 
   return (
     <div ref={comp} className="bg-background">
@@ -159,12 +194,15 @@ export default function Home() {
         <Header />
         <main className="flex-1">
           <Hero />
-          <div className="space-y-24 md:space-y-32">
-            <Partners />
+          <div>
+            <UploadAnalyze />
+            <Marquee />
             <Features />
-            <Counters />
-            <Faq />
-            <Cta />
+            <div className="space-y-24 md:space-y-32">
+              <Counters />
+              <Faq />
+              <Cta />
+            </div>
           </div>
         </main>
         <Footer />

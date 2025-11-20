@@ -9,7 +9,7 @@ const Preloader = () => {
     >
       <div className="flex items-center space-x-2 animate-pulse">
         <Logo className="h-8 w-auto" />
-        <span className="font-headline text-2xl font-bold text-white">Argus VPN</span>
+        <span className="font-headline text-2xl font-bold text-white">Truthlens AI</span>
       </div>
     </div>
   );
