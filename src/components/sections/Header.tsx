@@ -1,7 +1,8 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import gsap from 'gsap';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -21,28 +22,67 @@ const navLinks = [
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const ctaRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 40);
     };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    // GSAP animations
+    const ctx = gsap.context(() => {
+      // Idle float animation
+      gsap.to(headerRef.current, { 
+        y: '+=6', 
+        x: '+=4', 
+        duration: 4.5, 
+        ease: 'sine.inOut', 
+        repeat: -1, 
+        yoyo: true, 
+      });
+
+      // CTA hover animation
+      if (ctaRef.current) {
+        const cta = ctaRef.current;
+        const ctaAnimation = gsap.to(cta, {
+          y: -4,
+          boxShadow: '0 10px 25px -5px hsla(var(--primary), 0.4)',
+          paused: true,
+          duration: 0.3,
+          ease: 'power2.out',
+        });
+
+        cta.addEventListener('mouseenter', () => ctaAnimation.play());
+        cta.addEventListener('mouseleave', () => ctaAnimation.reverse());
+      }
+    }, headerRef);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      ctx.revert();
+    };
   }, []);
 
   return (
-    <header className={cn(
-      "sticky top-0 z-50 w-full transition-all duration-300",
-      isScrolled ? "bg-background/80 backdrop-blur-sm border-b border-border" : "bg-transparent"
-    )}>
-      <div className="container mx-auto px-4">
-        <div className="flex h-20 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
+    <header
+      ref={headerRef}
+      className={cn(
+        "site-header fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl mx-auto rounded-full",
+        "bg-[rgba(12,14,22,0.42)] backdrop-blur-[10px] border border-[rgba(255,255,255,0.06)]",
+        "transition-all duration-150 ease-in-out",
+        isScrolled ? "h-16 shadow-lg shadow-black/20" : "h-20"
+      )}
+    >
+      <div className="container mx-auto px-4 h-full">
+        <div className="flex h-full items-center justify-between">
+          <Link href="/" className="logo flex items-center gap-2">
             <Logo className="h-8 w-auto" />
             <span className="font-headline text-xl font-bold hidden sm:inline">Argus VPN</span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-6">
+          <nav className="nav-links hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
                 {link.label}
@@ -50,7 +90,7 @@ const Header = () => {
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="nav-right hidden lg:flex items-center gap-4">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="flex items-center gap-1 text-muted-foreground">
@@ -66,7 +106,7 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
             <Button variant="ghost" size="sm">Log in</Button>
-            <Button>Install Argus VPN</Button>
+            <Button ref={ctaRef} className="install-cta">Install Argus VPN</Button>
           </div>
 
           <div className="lg:hidden">
