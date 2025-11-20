@@ -1,34 +1,9 @@
 import { cn } from "@/lib/utils";
 import type { SVGProps } from "react";
 
-const Glyph = ({
-  char,
-  className,
-}: {
-  char: string;
-  className?: string;
-}) => (
-  <div
-    className={cn(
-      "absolute text-[24rem] font-bold font-headline text-white/5 pointer-events-none -translate-x-1/2 -translate-y-1/2",
-      className
-    )}
-  >
-    {char}
-  </div>
-);
-
-
 export function HeroIllustration(props: SVGProps<SVGSVGElement>) {
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      {/* ARGUS Glyphs */}
-      <Glyph char="A" className="top-1/2 left-[calc(50%-22rem)]" />
-      <Glyph char="R" className="top-1/2 left-[calc(50%-11rem)]" />
-      <Glyph char="G" className="top-1/2 left-1/2" />
-      <Glyph char="U" className="top-1/2 left-[calc(50%+11rem)]" />
-      <Glyph char="S" className="top-1/2 left-[calc(50%+22rem)]" />
-
       {/* Floating Orb */}
       <div className="hero-floating hero-floating-fallback w-full max-w-lg mx-auto">
         <svg
