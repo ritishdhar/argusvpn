@@ -16,7 +16,7 @@ const Hero = () => {
         </div>
 
         {/* Foreground Text Content */}
-        <div className="relative z-10 text-center flex flex-col items-center pt-24 md:pt-32">
+        <div className="relative z-10 text-center flex flex-col items-center">
           <div className="font-headline text-6xl md:text-8xl font-bold tracking-wider text-white hero-h1 mb-4" style={{ fontFamily: "'Audiowide', sans-serif" }}>
             <span className="inline-block" style={{marginRight: '0.1em'}}>A</span>
             <span className="inline-block" style={{marginRight: '0.1em'}}>R</span>
@@ -24,10 +24,10 @@ const Hero = () => {
             <span className="inline-block" style={{marginRight: '0.1em'}}>U</span>
             <span className="inline-block">S</span>
           </div>
-          <p className="text-2xl md:text-3xl text-muted-foreground mb-2 hero-subtext">
+          <p className="text-2xl md:text-3xl text-muted-foreground mb-2 hero-subtext" style={{ fontFamily: "'Inter', sans-serif" }}>
             VPN that simply works
           </p>
-          <p className="text-lg text-muted-foreground/80 mb-8 hero-subtext">
+          <p className="text-lg text-muted-foreground/80 mb-8 hero-subtext" style={{ fontFamily: "'Inter', sans-serif" }}>
             30-days money back guarantee. Fast. Reliable. Safe.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
