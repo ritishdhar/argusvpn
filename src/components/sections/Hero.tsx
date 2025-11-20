@@ -5,7 +5,7 @@ import { HeroIllustration } from './HeroIllustration';
 
 const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-gradient-hero" style={{ minHeight: 'calc(100vh - 5rem)'}}>
+    <section className="relative overflow-hidden bg-gradient-hero" style={{ minHeight: '100vh'}}>
       <div className="container mx-auto px-4 h-full flex flex-col justify-center items-center">
         
         {/* Background Illustration */}
